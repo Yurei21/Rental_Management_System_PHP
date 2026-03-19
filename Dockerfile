@@ -3,10 +3,11 @@ FROM node:20-alpine AS frontend-builder
 WORKDIR /app
 
 # Install frontend dependencies
-COPY package*.json vite.config.js tailwind.config.js postcss.config.js jsconfig.json ./
+COPY package.json package-lock.json ./
 RUN npm ci
 
 # Copy frontend source
+COPY vite.config.js tailwind.config.js postcss.config.js jsconfig.json ./
 COPY resources/js ./resources/js
 COPY resources/css ./resources/css
 COPY public ./public
