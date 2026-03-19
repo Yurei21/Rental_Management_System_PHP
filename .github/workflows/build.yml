@@ -36,4 +36,4 @@ jobs:
 
       # 5️⃣ Static analysis (REAL linting)
       - name: Run PHPStan
-        run: phpstan analyse app bootstrap --level=5
+        run: vendor/bin/phpstan analyse --configuration=phpstan.neon
