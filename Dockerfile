@@ -71,6 +71,12 @@ RUN apt-get update && apt-get install -y \
 # Copy built application
 COPY --from=backend-builder /app /var/www/html
 
+RUN mkdir -p \
+    storage/framework/cache/data \
+    storage/framework/sessions \
+    storage/framework/views \
+    bootstrap/cache
+
 # Fix permissions for Laravel
 RUN chown -R www-data:www-data storage bootstrap/cache
 
