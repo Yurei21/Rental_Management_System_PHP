@@ -23,26 +23,21 @@ jobs:
         with:
           php-version: '8.4'
           extensions: mbstring, pdo_mysql, bcmath, gd
+          tools: composer:v2, phpcs, phpstan
           coverage: none
 
       # 3️⃣ Install Composer dependencies
       - name: Install Composer dependencies
-        run: composer install --no-progress --no-suggest --prefer-dist
+        run: composer install --no-interaction --prefer-dist --optimize-autoloader
 
-      # 4️⃣ PHP built-in syntax check
+      # 4️⃣ PHP syntax check
       - name: PHP syntax check
-        run: find . -name "*.php" -exec php -l {} \;
+        run: find app bootstrap routes -name "*.php" -exec php -l {} \;
 
-      # 5️⃣ Install PHP_CodeSniffer and PHPStan
-      - name: Install PHP_CodeSniffer and PHPStan
-        run: |
-          composer global require "squizlabs/php_codesniffer=*"
-          composer global require "phpstan/phpstan:^1.10"
-
-      # 6️⃣ Code style check (PSR12)
+      # 5️⃣ Run PHP_CodeSniffer (PSR-12)
       - name: Run PHP_CodeSniffer (PSR12)
-        run: ~/.composer/vendor/bin/phpcs --standard=PSR12 app/ bootstrap/ routes/
+        run: phpcs --standard=PSR12 app/ bootstrap/ routes/
 
-      # 7️⃣ Static analysis with PHPStan
-      - name: Run PHPStan (Level 5)
-        run: ~/.composer/vendor/bin/phpstan analyse app/ bootstrap/ --level=5
+      # 6️⃣ Run PHPStan (Level 5)
+      - name: Run PHPStan
+        run: phpstan analyse app bootstrap --level=5
