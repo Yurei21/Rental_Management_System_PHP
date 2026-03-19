@@ -49,7 +49,7 @@ RUN php artisan config:cache \
     && php artisan view:cache
 
 # ---------- Stage 3: Runtime ----------
-FROM php:8.4-fpm-alpine AS runner
+FROM php:8.4-fpm AS runner
 WORKDIR /var/www/html
 
 # Install runtime PHP extensions
