@@ -22,7 +22,6 @@ RUN npm run build
 FROM php:8.4-cli AS backend-builder
 WORKDIR /app
 
-# Install system dependencies
 RUN apt-get update && apt-get install -y \
     unzip git pkg-config \
     libzip-dev libonig-dev \
@@ -33,21 +32,15 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install pdo_mysql mbstring bcmath zip gd
 
-# Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Copy composer files first (better caching)
-COPY composer.json composer.lock ./
-RUN composer install --no-dev --optimize-autoloader --no-interaction
-
-# Copy full Laravel project
+# 👇 IMPORTANT: copy FULL app FIRST
 COPY . .
 
-# Run composer install
+# 👇 THEN install dependencies
 RUN composer install \
     --no-dev \
     --no-interaction \
-    --no-scripts \
     --optimize-autoloader
 
 # Copy frontend build into Laravel public folder
