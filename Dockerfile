@@ -43,6 +43,13 @@ RUN composer install --no-dev --optimize-autoloader --no-interaction
 # Copy full Laravel project
 COPY . .
 
+# Run composer install
+RUN composer install \
+    --no-dev \
+    --no-interaction \
+    --no-scripts \
+    --optimize-autoloader
+
 # Copy frontend build into Laravel public folder
 COPY --from=frontend-builder /app/public/build ./public/build
 
