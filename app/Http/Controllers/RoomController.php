@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Room;
 use App\Http\Requests\StoreRoomRequest;
 use App\Http\Requests\UpdateRoomRequest;
+use App\Http\Resources\RoomResource;
+use Illuminate\Support\Facades\Auth;
 
 class RoomController extends Controller
 {
@@ -13,7 +15,28 @@ class RoomController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth::user();
+
+        $query = Room::query()->where(function ($q) use ($user) {
+            $q->where('created_by', $user->id)->orWhereHas('group.users', function ($q2) use ($user) {
+                $q2->where('user_id', $user->id);
+            });
+        });
+
+        $sortField = request("sort_field", "created_at");
+        $sortDirection = request("sort_direction", "desc");
+
+        if(request("search")){
+            $query->where("room_name", "like", "%" . request("search") . "%");
+        }
+
+        $rooms = $query->orderBy($sortField, $sortDirection)->paginate(9);
+
+        return inertia("Rooms/Index", [
+            'rooms' => RoomResource::collection($rooms),
+            'queryParams' => request()->query() ?: null,
+            'success' => session('success'),
+        ]);
     }
 
     /**

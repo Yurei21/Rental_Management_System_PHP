@@ -17,7 +17,9 @@ class RoomFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'room_name' => fake()->sentence(),
+            'created_by' => 1,
+            'modified_by' => 1,
         ];
     }
 }

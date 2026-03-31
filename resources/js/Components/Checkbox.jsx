@@ -1,10 +1,10 @@
-export default function Checkbox({ className = '', ...props }) {
+export default function Checkbox({ className = "", ...props }) {
     return (
         <input
             {...props}
             type="checkbox"
             className={
-                'rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800 ' +
+                "rounded border-surface-300 bg-white text-primary-600 shadow-sm transition duration-200 focus:ring-2 focus:ring-primary-500/20 dark:border-surface-600 dark:bg-surface-800 dark:focus:ring-primary-400/20 " +
                 className
             }
         />

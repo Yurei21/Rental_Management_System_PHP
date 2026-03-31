@@ -7,8 +7,8 @@ import { useState, useEffect } from "react";
 
 const NAV_ITEMS = [
     { label: "Dashboard", route: "dashboard" },
-    { label: "Tenants", route: "tenant.index" },
     { label: "Rooms", route: "room.index" },
+    { label: "Tenants", route: "tenant.index" },
     { label: "Invoices", route: "invoice.index" },
     { label: "Payments", route: "payment.index" },
     { label: "Group", route: "group.index" },
@@ -73,25 +73,15 @@ export default function AuthenticatedLayout({ header, children }) {
     return (
         <div
             className={[
-                "min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-gray-900 dark:via-slate-900 dark:to-blue-950",
+                "min-h-screen bg-gradient-to-br from-surface-50 via-primary-50 to-accent-50 dark:from-surface-900 dark:via-surface-800 dark:to-surface-900",
                 "transition-opacity duration-500",
                 mounted ? "opacity-100" : "opacity-0",
             ].join(" ")}
         >
-            {/* ── Progress bar ────────────────────────────────────────────── */}
-            <div
-                className={[
-                    "fixed top-0 left-0 z-[100] h-[2.5px] bg-gradient-to-r from-blue-500 via-indigo-500 to-blue-400",
-                    "transition-all duration-300 ease-out rounded-r-full shadow-sm shadow-blue-400/60",
-                    navigating ? "opacity-100" : "opacity-0",
-                ].join(" ")}
-                style={{ width: `${progress}%` }}
-            />
-
             {/* ── NAV ─────────────────────────────────────────────────────── */}
             <nav
                 className={[
-                    "sticky top-0 z-50 bg-white/70 dark:bg-gray-900/70 backdrop-blur-xl border-b border-blue-100/60 dark:border-blue-900/30",
+                    "sticky top-0 z-50 bg-white/80 dark:bg-surface-800/80 backdrop-blur-md border-b border-primary-100 dark:border-surface-700",
                     "transition-transform duration-500 ease-out",
                     mounted ? "translate-y-0" : "-translate-y-full",
                 ].join(" ")}
@@ -104,16 +94,16 @@ export default function AuthenticatedLayout({ header, children }) {
                                 href="/"
                                 className="shrink-0 group flex items-center gap-2.5"
                             >
-                                <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-blue-600 to-indigo-600 shadow-md shadow-blue-500/30 transition-all duration-200 group-hover:scale-95 group-hover:shadow-blue-500/50 group-hover:shadow-lg">
+                                <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-primary-600 to-primary-700 shadow-md shadow-primary-500/30 transition-all duration-200 group-hover:scale-95 group-hover:shadow-primary-500/50 group-hover:shadow-lg">
                                     <ApplicationLogo className="h-4 w-4 text-white" />
                                 </div>
-                                <span className="hidden sm:inline text-base font-bold bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 bg-clip-text text-transparent tracking-tight transition-opacity duration-200 group-hover:opacity-80">
+                                <span className="hidden sm:inline text-base font-bold bg-gradient-to-r from-primary-600 to-primary-700 dark:from-primary-400 dark:to-primary-500 bg-clip-text text-transparent tracking-tight transition-opacity duration-200 group-hover:opacity-80">
                                     RentFlow
                                 </span>
                             </Link>
 
                             {/* Desktop nav links */}
-                            <div className="hidden md:flex items-center gap-0.5">
+                            <div className="hidden md:flex items-center gap-4">
                                 {NAV_ITEMS.map(({ label, route: r }, i) => (
                                     <NavLink
                                         key={r}
@@ -156,16 +146,16 @@ export default function AuthenticatedLayout({ header, children }) {
                                 <Dropdown.Trigger>
                                     <button
                                         type="button"
-                                        className="flex items-center gap-2.5 pl-1.5 pr-3 py-1.5 rounded-xl bg-blue-50 dark:bg-blue-900/30 hover:bg-blue-100 dark:hover:bg-blue-900/50 border border-blue-100 dark:border-blue-800/50 transition-all duration-200 text-sm text-gray-700 dark:text-gray-300 font-medium shadow-sm hover:shadow-md hover:shadow-blue-100 dark:hover:shadow-blue-900/30 active:scale-95"
+                                        className="flex items-center gap-2.5 pl-1.5 pr-3 py-1.5 rounded-lg bg-primary-50 dark:bg-primary-900/30 hover:bg-primary-100 dark:hover:bg-primary-900/50 border border-primary-200 dark:border-primary-800/50 transition-all duration-200 text-sm text-surface-700 dark:text-surface-200 font-medium shadow-sm hover:shadow-md hover:shadow-primary-100 dark:hover:shadow-primary-900/30 active:scale-95"
                                     >
-                                        <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-blue-600 to-indigo-600 text-white text-[11px] font-bold shadow-sm shadow-blue-500/40">
+                                        <span className="flex h-7 w-7 items-center justify-center rounded-md bg-gradient-to-br from-primary-600 to-primary-700 text-white text-[11px] font-bold shadow-sm shadow-primary-500/40">
                                             {initials}
                                         </span>
                                         <span className="hidden sm:inline max-w-[140px] truncate">
                                             {user.name}
                                         </span>
                                         <svg
-                                            className="h-3.5 w-3.5 text-blue-400 dark:text-blue-500 transition-transform duration-200 group-data-[state=open]:rotate-180"
+                                            className="h-3.5 w-3.5 text-primary-600 dark:text-primary-400 transition-transform duration-200 group-data-[state=open]:rotate-180"
                                             viewBox="0 0 20 20"
                                             fill="currentColor"
                                         >
@@ -181,19 +171,19 @@ export default function AuthenticatedLayout({ header, children }) {
                                 <Dropdown.Content
                                     align="right"
                                     width="48"
-                                    contentClasses="py-1 bg-white dark:bg-gray-900 rounded-xl shadow-xl shadow-blue-500/10 border border-blue-100/80 dark:border-blue-900/40 overflow-hidden animate-in fade-in slide-in-from-top-1 duration-150"
+                                    contentClasses="py-2 bg-white dark:bg-surface-800 rounded-xl shadow-lg shadow-primary-200/20 dark:shadow-surface-900/50 border border-primary-100 dark:border-surface-700 overflow-hidden"
                                 >
-                                    <div className="px-3 py-2.5 border-b border-blue-100/60 dark:border-blue-900/30 mb-1">
-                                        <p className="text-[11px] font-semibold text-blue-500 dark:text-blue-400 uppercase tracking-widest">
+                                    <div className="px-3 py-2.5 border-b border-primary-100 dark:border-surface-700 mb-1">
+                                        <p className="text-[11px] font-semibold text-primary-600 dark:text-primary-400 uppercase tracking-widest">
                                             Account
                                         </p>
-                                        <p className="text-sm font-medium text-gray-700 dark:text-gray-300 truncate mt-0.5">
+                                        <p className="text-sm font-medium text-surface-700 dark:text-surface-200 truncate mt-0.5">
                                             {user.email}
                                         </p>
                                     </div>
                                     <Dropdown.Link
                                         href={route("profile.edit")}
-                                        className="flex items-center gap-2 px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/30 hover:text-blue-700 dark:hover:text-blue-300 rounded-lg mx-1 transition-all duration-150 hover:translate-x-0.5"
+                                        className="flex items-center gap-2 px-3 py-2 text-sm text-surface-700 dark:text-surface-200 hover:bg-primary-50 dark:hover:bg-primary-900/30 hover:text-primary-700 dark:hover:text-primary-300 rounded-lg mx-1 transition-all duration-150 hover:translate-x-0.5"
                                     >
                                         Profile
                                     </Dropdown.Link>
@@ -201,7 +191,7 @@ export default function AuthenticatedLayout({ header, children }) {
                                         href={route("logout")}
                                         method="post"
                                         as="button"
-                                        className="flex w-full items-center gap-2 px-3 py-2 text-sm text-red-500 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10 rounded-lg mx-1 mb-1 transition-all duration-150 hover:translate-x-0.5"
+                                        className="flex w-full items-center gap-2 px-3 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10 rounded-lg mx-1 mb-1 transition-all duration-150 hover:translate-x-0.5"
                                     >
                                         Log Out
                                     </Dropdown.Link>
@@ -214,7 +204,7 @@ export default function AuthenticatedLayout({ header, children }) {
                             onClick={() =>
                                 setShowingNavigationDropdown((p) => !p)
                             }
-                            className="md:hidden flex items-center justify-center w-9 h-9 rounded-lg text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-all duration-200 active:scale-90"
+                            className="md:hidden flex items-center justify-center w-9 h-9 rounded-lg text-primary-600 hover:bg-primary-50 dark:hover:bg-primary-900/30 transition-all duration-200 active:scale-90"
                             aria-label="Toggle navigation"
                         >
                             {/* Animated hamburger → X */}
@@ -251,7 +241,7 @@ export default function AuthenticatedLayout({ header, children }) {
                 {/* ── Mobile menu ──────────────────────────────────────────── */}
                 <div
                     className={[
-                        "md:hidden border-t border-blue-100/60 dark:border-blue-900/30 bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl",
+                        "md:hidden border-t border-primary-100 dark:border-surface-700 bg-white/95 dark:bg-surface-800/95 backdrop-blur-md",
                         "overflow-hidden transition-all duration-300 ease-in-out",
                         showingNavigationDropdown
                             ? "max-h-[600px] opacity-100"
@@ -259,15 +249,15 @@ export default function AuthenticatedLayout({ header, children }) {
                     ].join(" ")}
                 >
                     {/* Mobile user card */}
-                    <div className="flex items-center gap-3 px-4 py-4 border-b border-blue-100/60 dark:border-blue-900/30">
-                        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 text-white text-sm font-bold shadow-md shadow-blue-500/30">
+                    <div className="flex items-center gap-3 px-4 py-4 border-b border-primary-100 dark:border-surface-700">
+                        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-primary-600 to-primary-700 text-white text-sm font-bold shadow-md shadow-primary-500/30">
                             {initials}
                         </span>
                         <div className="min-w-0">
-                            <p className="text-sm font-semibold text-gray-800 dark:text-gray-200 truncate">
+                            <p className="text-sm font-semibold text-surface-800 dark:text-surface-200 truncate">
                                 {user.name}
                             </p>
-                            <p className="text-xs text-gray-400 dark:text-gray-500 truncate">
+                            <p className="text-xs text-surface-500 dark:text-surface-400 truncate">
                                 {user.email}
                             </p>
                         </div>
@@ -292,9 +282,6 @@ export default function AuthenticatedLayout({ header, children }) {
                                     showingNavigationDropdown
                                         ? "opacity-100 translate-x-0"
                                         : "opacity-0 -translate-x-2",
-                                    route().current(r)
-                                        ? "bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300"
-                                        : "text-gray-600 dark:text-gray-400 hover:bg-blue-50/70 dark:hover:bg-blue-900/30 hover:text-blue-700 dark:hover:text-blue-400",
                                 ].join(" ")}
                             >
                                 {label}
@@ -303,10 +290,10 @@ export default function AuthenticatedLayout({ header, children }) {
                     </div>
 
                     {/* Mobile account actions */}
-                    <div className="px-3 pb-4 pt-1 border-t border-blue-100/60 dark:border-blue-900/30 mt-1 space-y-0.5">
+                    <div className="px-3 pb-4 pt-1 border-t border-primary-100 dark:border-surface-700 mt-1 space-y-0.5">
                         <ResponsiveNavLink
                             href={route("profile.edit")}
-                            className="block px-3 py-2.5 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-blue-50/70 dark:hover:bg-blue-900/30 hover:text-blue-700 dark:hover:text-blue-400 transition-all duration-200 hover:translate-x-1"
+                            className="block px-3 py-2.5 rounded-lg text-sm font-medium text-surface-600 dark:text-surface-400 hover:bg-primary-50/70 dark:hover:bg-primary-900/30 hover:text-primary-700 dark:hover:text-primary-400 transition-all duration-200 hover:translate-x-1"
                         >
                             Profile
                         </ResponsiveNavLink>
@@ -314,7 +301,7 @@ export default function AuthenticatedLayout({ header, children }) {
                             method="post"
                             href={route("logout")}
                             as="button"
-                            className="block w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium text-red-500 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10 transition-all duration-200 hover:translate-x-1"
+                            className="block w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10 transition-all duration-200 hover:translate-x-1"
                         >
                             Log Out
                         </ResponsiveNavLink>
@@ -326,7 +313,7 @@ export default function AuthenticatedLayout({ header, children }) {
             {header && (
                 <header
                     className={[
-                        "bg-white/60 dark:bg-gray-800/30 backdrop-blur-sm border-b border-blue-100/60 dark:border-blue-900/20",
+                        "bg-white/60 dark:bg-surface-800/40 backdrop-blur-sm border-b border-primary-100 dark:border-surface-700",
                         "transition-all duration-500 delay-200 ease-out",
                         mounted
                             ? "opacity-100 translate-y-0"
