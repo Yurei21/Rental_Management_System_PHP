@@ -17,7 +17,7 @@ class RoomController extends Controller
     {
         $user = Auth::user();
 
-        $query = Room::query()->where(function ($q) use ($user) {
+        $query = Room::query()->with('group.users')->where(function ($q) use ($user) {
             $q->where('created_by', $user->id)->orWhereHas('group.users', function ($q2) use ($user) {
                 $q2->where('user_id', $user->id);
             });

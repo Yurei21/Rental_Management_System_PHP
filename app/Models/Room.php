@@ -26,6 +26,6 @@ class Room extends Model
     }
 
     public function updatedBy() {
-        return $this->belongsto(User::class, 'modified_by');
+        return $this->belongsTo(User::class, 'modified_by');
     }
 }

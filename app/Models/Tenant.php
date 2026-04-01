@@ -20,7 +20,7 @@ class Tenant extends Model
     ];
 
     public function room() {
-        return $this->hasOne(Room::class, 'room_id');
+        return $this->belongsTo(Room::class, 'room_id');
     }
 
     public function group() {
