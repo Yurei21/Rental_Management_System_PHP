@@ -7,7 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class TenantResource extends JsonResource
 {
-    public static $wrap = false;
+    public static $wrap = null;
     /**
      * Transform the resource into an array.
      *

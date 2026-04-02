@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -45,25 +47,23 @@ class User extends Authenticatable implements MustVerifyEmail
             'password' => 'hashed',
         ];
     }
-    public function groups()
-    {
+    public function groups(): BelongsToMany {
         return $this->belongsToMany(Group::class, 'group_members')
             ->withPivot('role')
             ->withTimestamps();
     }
-    public function tenants() {
+
+    public function tenants(): HasMany {
         return $this->hasMany(Tenant::class, 'created_by');
     }
 
-    public function rooms() {
+    public function rooms(): HasMany {
         return $this->hasMany(Room::class, 'created_by');
     }
-    public function invoices()
-    {
+    public function invoices(): HasMany {
         return $this->hasMany(Invoice::class, 'created_by');
     }
-    public function payments()
-    {
+    public function payments(): HasMany {
         return $this->hasMany(Payment::class, 'created_by');
     }
 }

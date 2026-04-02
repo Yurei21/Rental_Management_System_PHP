@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Tenant extends Model
 {
@@ -19,27 +21,27 @@ class Tenant extends Model
         'modified_by'
     ];
 
-    public function room() {
+    public function room(): BelongsTo {
         return $this->belongsTo(Room::class, 'room_id');
     }
 
-    public function group() {
+    public function group(): BelongsTo {
         return $this->belongsTo(Group::class, 'group_id');
     }
 
-    public function invoice() {
+    public function invoice(): HasMany {
         return $this->hasMany(Invoice::class);
     }
 
-    public function payment() {
+    public function payment(): HasMany {
         return $this->hasMany(Payment::class);
     }
 
-    public function createdBy() {
+    public function createdBy(): BelongsTo {
         return $this->belongsTo(User::class, 'created_by');
     }
 
-    public function updatedBy() {
+    public function updatedBy(): BelongsTo {
         return $this->belongsto(User::class, 'modified_by');
     }
 }

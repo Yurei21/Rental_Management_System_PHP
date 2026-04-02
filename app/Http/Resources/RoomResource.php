@@ -2,13 +2,21 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Room;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @property int $id
+ * @property string $room_name
+ * @property Room $group
+ * @property string $created_at
+ * @property string $updated_at
+ */
 class RoomResource extends JsonResource
 {
-    public static $wrap = false;
+    public static $wrap = null;
     /**
      * Transform the resource into an array.
      *

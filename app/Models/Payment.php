@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Payment extends Model
 {
@@ -20,15 +21,15 @@ class Payment extends Model
         'modified_by'
     ];
 
-    public function invoice() {
+    public function invoice(): BelongsTo {
         return $this->belongsTo(Invoice::class, 'invoice_id');
     }
 
-    public function createdBy() {
+    public function createdBy(): BelongsTo {
         return $this->belongsTo(User::class, 'created_by');
     }
 
-    public function updatedBy() {
+    public function updatedBy(): BelongsTo {
         return $this->belongsTo(User::class, 'modified_by');
     }
 }
