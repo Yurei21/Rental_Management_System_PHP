@@ -13,6 +13,8 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @property Room $group
  * @property string $created_at
  * @property string $updated_at
+ * @property string $created_by
+ * @property string $modified_by
  */
 class RoomResource extends JsonResource
 {
@@ -28,6 +30,8 @@ class RoomResource extends JsonResource
             'id' => $this->id,
             'room_name' => $this->room_name,
             'group' => $this->group,
+            'created_by' => new UserResource($this->createdBy),
+            'modified_by' => new UserResource($this->updatedBy),
             'created_at' => (new Carbon($this->created_at))->format('Y-m-d'),
             'updated_at' => (new Carbon($this->updated_at))->format('Y-m-d'),
         ];
