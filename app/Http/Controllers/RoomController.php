@@ -6,6 +6,7 @@ use App\Models\Room;
 use App\Http\Requests\StoreRoomRequest;
 use App\Http\Requests\UpdateRoomRequest;
 use App\Http\Resources\RoomResource;
+use App\Http\Resources\TenantResource;
 use Illuminate\Support\Facades\Auth;
 
 class RoomController extends Controller
@@ -77,7 +78,9 @@ class RoomController extends Controller
         $tenants = $query->orderBy($sortField, $sortDirection)->paginate(10)->onEachSide(1);
 
         return inertia('Rooms/Show', [
-            ''
+            'room' => new RoomResource($room),
+            'tenants' => TenantResource::collection($tenants),
+            'queryParams' => request()->query() ?: null,
         ]);
     }
 
